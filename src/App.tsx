@@ -1,5 +1,6 @@
 import "./App.css";
-import { MinimalViable } from "./MinimalViable";
+// import { MinimalViable } from "./MinimalViable";
+import { NoDropAnimation } from "./NoDropAnimation";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
         with <b>dnd-kit-sortable-tree</b>
       </h2>
       <div style={{ margin: "4rem auto" }}>
-        <MinimalViable />
+        {/* <MinimalViable /> */}
+        <NoDropAnimation />
       </div>
     </>
   );
