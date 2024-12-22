@@ -1,6 +1,7 @@
 import "./App.css";
 // import { MinimalViable } from "./MinimalViable";
-import { NoDropAnimation } from "./NoDropAnimation";
+import { TwoDimensionalTree } from "./twoDimensionalTree/TwoDimensional";
+// import { NoDropAnimation } from "./NoDropAnimation";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       </h2>
       <div style={{ margin: "4rem auto" }}>
         {/* <MinimalViable /> */}
-        <NoDropAnimation />
+        <TwoDimensionalTree />
+        {/* <NoDropAnimation /> */}
       </div>
     </>
   );

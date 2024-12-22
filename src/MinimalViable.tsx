@@ -1,10 +1,10 @@
+import { forwardRef, useState } from "react";
 import {
   SimpleTreeItemWrapper,
   SortableTree,
   TreeItemComponentProps,
   TreeItems,
 } from "dnd-kit-sortable-tree";
-import { forwardRef, useState } from "react";
 
 export const MinimalViable = () => {
   const [items, setItems] = useState(initialViableMinimalData);
@@ -30,7 +30,7 @@ const MinimalTreeItemComponent = forwardRef<
 >((props, ref) => (
   /* you could also use FolderTreeItemWrapper if you want to show vertical lines.  */
   <SimpleTreeItemWrapper {...props} ref={ref}>
-    <div style={{ color: "#fff" }}>{props.item.value}</div>
+    <div>{props.item.value}</div>
   </SimpleTreeItemWrapper>
 ));
 
