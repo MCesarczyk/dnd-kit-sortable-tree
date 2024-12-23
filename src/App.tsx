@@ -1,7 +1,5 @@
 import "./App.css";
-// import { MinimalViable } from "./MinimalViable";
-import { TwoDimensionalTree } from "./twoDimensionalTree/TwoDimensional";
-// import { NoDropAnimation } from "./NoDropAnimation";
+import { Tree } from "./twoDimensionalTree";
 
 function App() {
   return (
@@ -11,9 +9,7 @@ function App() {
         with <b>dnd-kit-sortable-tree</b>
       </h2>
       <div style={{ margin: "4rem auto" }}>
-        {/* <MinimalViable /> */}
-        <TwoDimensionalTree />
-        {/* <NoDropAnimation /> */}
+        <Tree />
       </div>
     </>
   );
