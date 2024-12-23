@@ -10,7 +10,6 @@ export type MinimalTreeItemData = {
   isLast?: boolean;
   parent?: MinimalTreeItemData | null;
   children?: MinimalTreeItemData[];
-  container?: boolean;
 };
 
 export type CollapsibleItemData = MinimalTreeItemData & { onItemCollapse?: (clickedItem: MinimalTreeItemData) => void };

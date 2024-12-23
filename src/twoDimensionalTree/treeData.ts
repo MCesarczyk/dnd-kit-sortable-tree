@@ -4,7 +4,7 @@ export const getInitialViableMinimalData = (handleCollapse?: (clickedItem: Minim
   {
     id: "1",
     value: "Todo",
-    container: true,
+    canHaveChildren: true,
     onItemCollapse: handleCollapse,
     children: [
       {
@@ -22,7 +22,7 @@ export const getInitialViableMinimalData = (handleCollapse?: (clickedItem: Minim
   {
     id: "2",
     value: "In progress",
-    container: true,
+    canHaveChildren: true,
     onItemCollapse: handleCollapse,
     children: [
       {
@@ -38,7 +38,7 @@ export const getInitialViableMinimalData = (handleCollapse?: (clickedItem: Minim
   {
     id: "3",
     value: "Done",
-    container: true,
+    canHaveChildren: true,
     onItemCollapse: handleCollapse,
     children: [
       {

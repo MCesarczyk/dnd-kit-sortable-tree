@@ -22,7 +22,7 @@ export const Tree = () => {
     const itemsFlatten = flattenItems(newItems);
 
     if (
-      itemsFlatten.filter((item) => item.container && item.parentId).length > 0
+      itemsFlatten.filter((item) => item.canHaveChildren && item.parentId).length > 0
     ) {
       return;
     }
@@ -33,7 +33,7 @@ export const Tree = () => {
   const handleItemCollapse = (clickedItem: MinimalTreeItemData) => {
     setItems((items) =>
       items.map((item) => {
-        if (!item.container) {
+        if (!item.canHaveChildren) {
           return item;
         }
 
@@ -56,6 +56,7 @@ export const Tree = () => {
       indentationWidth={0.001}
       onItemsChanged={onItemsChanged}
       TreeItemComponent={Item}
+      dropAnimation={null}
     />
   );
 };
