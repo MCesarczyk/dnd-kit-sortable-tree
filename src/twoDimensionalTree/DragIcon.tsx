@@ -16,7 +16,7 @@ const DragIconWrapper = styled.div`
   height: 9px;
   background-color: transparent;
   cursor: move;
-  margin-right: 12px;
+  margin-left: 6px;
 
   span {
     position: absolute;

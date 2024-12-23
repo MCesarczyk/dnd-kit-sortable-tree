@@ -22,21 +22,28 @@ export const Item = forwardRef<
     disableCollapseOnItemClick={true}
     collapsed={props.item.collapsed}
   >
-    <LabelWrapper>
-      <div {...props.handleProps}>
-        <DragIcon />
-      </div>
-      {props.item.canHaveChildren && <FolderIcon />}
-      <Label>{props.item.value}</Label>
-    </LabelWrapper>
-    {props.item.canHaveChildren && (
-      <CollapseButton
-        {...props}
-        onClick={() =>
-          props.item.onItemCollapse && props.item.onItemCollapse(props.item)
-        }
-      />
-    )}
+    <MainContent>
+      <LabelWrapper>
+        <div {...props.handleProps}>
+          <DragIcon />
+        </div>
+        {props.item.canHaveChildren && <FolderIcon />}
+        <Label>{props.item.value}</Label>
+      </LabelWrapper>
+      {props.item.canHaveChildren && (
+        <CollapseButton
+          {...props}
+          onClick={() =>
+            props.item.onItemCollapse && props.item.onItemCollapse(props.item)
+          }
+        />
+      )}
+    </MainContent>
+    {props.item.canHaveChildren && !props.item.children?.length ? (
+      <>
+        <DragArea>Drag layers here to group them.</DragArea>
+      </>
+    ) : null}
   </ItemWrapper>
 ));
 
@@ -49,8 +56,8 @@ const ItemWrapper = styled(SimpleTreeItemWrapper)<{ $nested?: boolean }>`
   > div {
     border: none;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    padding: 0;
   }
 
   ${({ $nested }) =>
@@ -60,6 +67,24 @@ const ItemWrapper = styled(SimpleTreeItemWrapper)<{ $nested?: boolean }>`
       background-color: #3d3b3b;
       border-bottom: 1px solid #ffffff1a;
     `}
+`;
+
+const MainContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+`;
+
+const DragArea = styled.div`
+  background-color: #3d3b3b;
+  color: #a09f9f;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const LabelWrapper = styled.div`
