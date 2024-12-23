@@ -1,34 +1,54 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import {
   SimpleTreeItemWrapper,
   SortableTree,
   TreeItemComponentProps,
 } from "dnd-kit-sortable-tree";
-import { MinimalTreeItemData } from "./types";
-import { initialViableMinimalData } from "./treeData";
+import {
+  CollapsibleItemData,
+  MinimalTreeItemData,
+  SortableListItems,
+} from "./types";
+import { getInitialViableMinimalData } from "./treeData";
 import styled, { css } from "styled-components";
 
 export const TwoDimensionalTree = () => {
-  const [items, setItems] = useState(initialViableMinimalData);
+  const [items, setItems] = useState<SortableListItems>([]);
 
   const onItemsChanged = (newItems: typeof items) => {
     const itemsFlatten = newItems.flatMap((item) =>
       item.children ? [item, ...item.children] : item
     );
     console.log("items", itemsFlatten);
-    console.log(
-      "containers",
-      itemsFlatten.filter((item) => item.container)
-    );
+
     if (
       itemsFlatten.filter((item) => item.container && item.parentId).length > 0
     ) {
-      // console.error('Containers cannot have parent');
       return;
     }
 
     setItems(newItems);
   };
+
+  const handleItemCollapse = (clickedItem: MinimalTreeItemData) => {
+    setItems((items) =>
+      items.map((item) => {
+        if (!item.container) {
+          return item;
+        }
+
+        if (item.id === clickedItem.id) {
+          return { ...item, collapsed: !item.collapsed };
+        }
+
+        return item;
+      })
+    );
+  };
+
+  useEffect(() => {
+    setItems(getInitialViableMinimalData(handleItemCollapse));
+  }, []);
 
   return (
     <SortableTree
@@ -42,27 +62,37 @@ export const TwoDimensionalTree = () => {
 
 const MinimalTreeItemComponent = forwardRef<
   HTMLDivElement,
-  TreeItemComponentProps<MinimalTreeItemData>
+  TreeItemComponentProps<CollapsibleItemData>
 >((props, ref) => (
-  <ItemWrapper container={props.item.container}>
+  <ItemWrapper $container={props.item.container}>
     <SimpleTreeItemWrapper
       {...props}
       ref={ref}
       manualDrag={true}
       showDragHandle={false}
+      disableCollapseOnItemClick={true}
+      collapsed={props.item.collapsed}
     >
       <div {...props.handleProps} style={{ marginRight: 12, cursor: "move" }}>
         #
+      </div>
+      <div
+        onClick={() =>
+          props.item.onItemCollapse && props.item.onItemCollapse(props.item)
+        }
+        style={{ marginRight: 12, cursor: "pointer" }}
+      >
+        O
       </div>
       <div>{props.item.value}</div>
     </SimpleTreeItemWrapper>
   </ItemWrapper>
 ));
 
-const ItemWrapper = styled.div<{ container?: boolean }>`
+const ItemWrapper = styled.div<{ $container?: boolean }>`
   user-select: none;
 
-  ${({ container }) =>
+  ${({ $container: container }) =>
     container &&
     css`
       background-color: lightgray;

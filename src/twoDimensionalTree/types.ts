@@ -1,3 +1,5 @@
+import { TreeItems } from "dnd-kit-sortable-tree";
+
 export type MinimalTreeItemData = {
   id: string;
   value: string;
@@ -10,3 +12,7 @@ export type MinimalTreeItemData = {
   children?: MinimalTreeItemData[];
   container?: boolean;
 };
+
+export type CollapsibleItemData = MinimalTreeItemData & { onItemCollapse?: (clickedItem: MinimalTreeItemData) => void };
+
+export type SortableListItems = TreeItems<CollapsibleItemData>;

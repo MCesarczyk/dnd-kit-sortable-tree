@@ -1,11 +1,11 @@
-import { TreeItems } from "dnd-kit-sortable-tree";
-import { MinimalTreeItemData } from "./types";
+import { MinimalTreeItemData, SortableListItems } from "./types";
 
-export const initialViableMinimalData: TreeItems<MinimalTreeItemData> = [
+export const getInitialViableMinimalData = (handleCollapse?: (clickedItem: MinimalTreeItemData) => void): SortableListItems => [
   {
     id: "1",
     value: "Todo",
     container: true,
+    onItemCollapse: handleCollapse,
     children: [
       {
         id: "4",
@@ -23,6 +23,7 @@ export const initialViableMinimalData: TreeItems<MinimalTreeItemData> = [
     id: "2",
     value: "In progress",
     container: true,
+    onItemCollapse: handleCollapse,
     children: [
       {
         id: "6",
@@ -38,6 +39,7 @@ export const initialViableMinimalData: TreeItems<MinimalTreeItemData> = [
     id: "3",
     value: "Done",
     container: true,
+    onItemCollapse: handleCollapse,
     children: [
       {
         id: "8",
