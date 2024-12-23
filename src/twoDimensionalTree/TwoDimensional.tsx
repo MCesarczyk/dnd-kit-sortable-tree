@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useState } from "react";
 import {
   SimpleTreeItemWrapper,
   SortableTree,
@@ -10,14 +10,29 @@ import { initialViableMinimalData } from "./treeData";
 export const TwoDimensionalTree = () => {
   const [items, setItems] = useState(initialViableMinimalData);
 
-  useEffect(() => {
-    console.table(items);
-  }, [items]);
+  const onItemsChanged = (newItems: typeof items) => {
+    const itemsFlatten = newItems.flatMap((item) =>
+      item.children ? [item, ...item.children] : item
+    );
+    console.log("items", itemsFlatten);
+    console.log(
+      "containers",
+      itemsFlatten.filter((item) => item.container)
+    );
+    if (
+      itemsFlatten.filter((item) => item.container && item.parentId).length > 0
+    ) {
+      // console.error('Containers cannot have parent');
+      return;
+    }
+
+    setItems(newItems);
+  };
 
   return (
     <SortableTree
       items={items}
-      onItemsChanged={setItems}
+      onItemsChanged={onItemsChanged}
       TreeItemComponent={MinimalTreeItemComponent}
     />
   );

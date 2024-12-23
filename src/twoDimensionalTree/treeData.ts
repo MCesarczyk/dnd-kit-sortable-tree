@@ -5,6 +5,7 @@ export const initialViableMinimalData: TreeItems<MinimalTreeItemData> = [
   {
     id: "1",
     value: "Todo",
+    container: true,
     children: [
       {
         id: "4",
@@ -21,6 +22,7 @@ export const initialViableMinimalData: TreeItems<MinimalTreeItemData> = [
   {
     id: "2",
     value: "In progress",
+    container: true,
     children: [
       {
         id: "6",
@@ -35,6 +37,7 @@ export const initialViableMinimalData: TreeItems<MinimalTreeItemData> = [
   {
     id: "3",
     value: "Done",
+    container: true,
     children: [
       {
         id: "8",
